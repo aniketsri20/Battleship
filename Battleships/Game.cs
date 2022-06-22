@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Battleships
 {
@@ -20,7 +18,73 @@ namespace Battleships
         // returns: the number of ships sunk by the set of guesses
         public static int Play(string[] ships, string[] guesses)
         {
-            return 0;
+            return ShunkShipCount(ships, guesses);
+        }
+
+        static int ShunkShipCount(string[] ships, string[] guesses)
+        {
+            if (ships == null || guesses == null || guesses.Length == 0 || ships.Length == 0)
+            {
+                Console.WriteLine("ships or guesses is missing");
+                return 0;
+            }
+
+            string strRegex = @"([0-9]+[:]+[0-9]+[,][0-9]+[:]+[0-9]+)";
+            Regex re = new Regex(strRegex);
+            int count = 0;
+            for (int i = 0; i < ships.Length; i++)
+            {
+                if (re.IsMatch(ships[i]))
+                {
+                    var cod = ships[i].Split(',');
+                    var c1 = cod[0].Split(':');
+                    var c2 = cod[1].Split(':');
+
+                    int x1 = int.Parse(c1[0]);
+                    int y1 = int.Parse(c1[1]);
+                    int x2 = int.Parse(c2[0]);
+                    int y2 = int.Parse(c2[1]);
+
+                    if (x1 == x2 && ((y1 - y2) > 1 || (y1 - y2) < 5))
+                    {
+                        var shipArrayCordinate = Enumerable.Range(y1, y2 - y1 + 1).Select(y => $"{x1}:{y}").ToArray();
+                        if (guesses.IntersectCount(shipArrayCordinate) == shipArrayCordinate.Count()) count++;
+                    }
+                    else if (y1 == y2 && ((x1 - x2) > 1 || (x1 - x2) < 5))
+                    {
+                        var shipArrayCordinate = Enumerable.Range(x1, x2 - x1 + 1).Select(x => $"{x}:{y1}").ToArray();
+                        if (guesses.IntersectCount(shipArrayCordinate) == shipArrayCordinate.Count()) count++;
+                    }
+                    else Console.WriteLine($"ships co-ordinate is invalid {ships[i]} or ship length is not in range 2-4");
+
+                }
+                else Console.WriteLine("Please provide ship coordinate in proper format");
+            }
+
+            return count;
+        }
+
+    }
+    public static class CollectionExtensions
+    {
+
+        public static int IntersectCount(this string[] firstArray, string[] secondArray)
+        {
+            int count = 0;
+            if (firstArray == null || secondArray == null || firstArray.Length == 0 || secondArray.Length == 0)
+            {
+                return count;
+            }
+
+            for (var i = 0; i < secondArray.Length; i++)
+            {
+
+                if (firstArray.(secondArray[i]))
+                {
+                    count++;
+                }
+            }
+            return count;
         }
     }
 }
