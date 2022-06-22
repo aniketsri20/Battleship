@@ -1,3 +1,11 @@
+# Solution...
+There is mutiple way to solve this problem-
+1) Using 2d array
+2) Using List
+For both of the approcah we are storing ship location in above collection.
+As we have both ship and guesses location already so I have utilize existing value instead storing this.
+
+------------------------------------------------------------------------------------------------------------------
 # Imagine a game of battleships...
 The player has to guess the location of the opponent's 'ships' on a 10x10 grid. Ships are one unit wide and 2-4 units long, they may be placed vertically or horizontally. The player asks if a given co-ordinate is a hit or a miss. Once all cells representing a ship are hit - that ship is sunk.
 
