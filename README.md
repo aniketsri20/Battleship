@@ -17,7 +17,7 @@ then can take count
 
 Using List :
 
-We can create object of below class and store cordinate comma sperate string and hits in common seprated string for matching value.
+We can create object of below class and store cordinate comma sperate string and matching hits cordinated in common seprated string and IsSunk will give correct count.
 
 
 class Ship
