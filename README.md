@@ -3,7 +3,7 @@ There is mutiple way to solve this problem-
 1) Using 2d array
 2) Using List
 
-For both of the approcah we are storing ship location in above collection.
+For both of the approcah we have to storing ship location in above collection.
 As we have both ship and guesses location already so I have utilize existing value instead storing this.
 
 ------------------------------------------------------------------------------------------------------------------
